@@ -1,0 +1,11 @@
+domain,label,source
+google.com,legitimate,manual-demo
+microsoft.com,legitimate,manual-demo
+wikipedia.org,legitimate,manual-demo
+github.com,legitimate,manual-demo
+openai.com,legitimate,manual-demo
+asdkjhqwekjhzxc.com,simulated-dga,synthetic
+xk3jh2kasdjf.net,simulated-dga,synthetic
+bjaksdh2k3jhasd.org,simulated-dga,synthetic
+zmxncbvpoiuqwer123.com,simulated-dga,synthetic
+q7w9e2r4t6y8u1i3.net,simulated-dga,synthetic
