@@ -9,3 +9,16 @@ venv/
 *.log
 coverage.xml
 htmlcov/
+
+# Local AI assistant instructions and personal workflow notes
+.agents/
+.codex/
+.cursor/
+.tools/
+AGENTS.md
+CLAUDE.md
+CODEX.md
+GEMINI.md
+SKILL.md
+*.prompt.md
+GIT_WORKFLOW.md
