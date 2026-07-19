@@ -61,7 +61,11 @@ def deduplicate(samples: Iterable[DomainSample]) -> list[DomainSample]:
 def write_csv(samples: Sequence[DomainSample], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=("domain", "label", "source"))
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=("domain", "label", "source"),
+            lineterminator="\n",
+        )
         writer.writeheader()
         for sample in samples:
             writer.writerow(

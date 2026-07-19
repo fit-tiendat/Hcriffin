@@ -1,36 +1,34 @@
-# Git workflow cho reconstruction series
+# Git workflow
 
 ## Nguyen tac
 
+- Tat ca code hien tai nam trong `main/`; khong tao snapshot theo episode.
+- Moi commit chi gom mot thay doi logic co the giai thich va kiem thu.
 - Dung ngay commit thuc te, khong backdate.
-- Moi ngay chi commit phan da chay va da hieu.
-- Ghi ro code/tap du lieu/model nao la tham khao hoac ma nguon mo.
-- Khong commit log runtime, secret, file `.env`, cache Python hay du lieu nhay cam.
-- Truoc khi push, luon xem `git status` va `git diff --staged`.
+- Ghi ro code, dataset, model va rules nao la tham khao hoac ma nguon mo.
+- Khong commit log runtime, secret, `.env`, cache Python hay du lieu nhay cam.
 
-## Ngay 1 - Episode 01
+## Quy trinh truoc moi commit
 
 ```powershell
 cd Hcriffin
+python3 -m unittest discover -s main/tests -v
 git status
-git add README.md GIT_WORKFLOW.md .gitignore "episode 1"
+git diff
+
+# Chi stage cac file thuoc thay doi hien tai, vi du:
+git add main/src/model.py main/tests/test_model.py main/README.md
 git diff --staged
-git commit -m "feat: add explainable DGA heuristic baseline"
-git push -u origin main
+git commit -m "feat: train baseline ML domain classifier"
+git push origin main
 ```
 
-Noi dung co the mo ta trong commit/README:
-
-```text
-- Define the DGA detection scope and MITRE ATT&CK mapping.
-- Add lexical domain feature extraction.
-- Add an explainable heuristic baseline and CLI demo.
-- Add synthetic samples and seven unit tests.
-```
+Khong nen mac dinh dung `git add .` khi trong workspace con log, dataset lon
+hoac file thu nghiem chua kiem tra.
 
 ## Lo trinh commit de xuat
 
-| Ngay | Commit message | Bang chung can co |
+| Moc | Commit message | Bang chung can co |
 |---|---|---|
 | 1 | `feat: add explainable DGA heuristic baseline` | CLI va 7 unit tests |
 | 2 | `feat: add dataset preparation and evaluation metrics` | Dataset report, precision/recall/F1 |
@@ -45,15 +43,10 @@ Noi dung co the mo ta trong commit/README:
 
 ## Cach trinh bay voi HR
 
-Nen noi:
+> Em bat dau tu bai toan DGA va mot baseline nho, sau do bo sung dataset,
+> metrics, model va tung thanh phan cua network monitoring pipeline. Moi commit
+> tren Git the hien mot thay doi da duoc test trong cung codebase `main`.
 
-> Em bat dau tu mot prototype HCRiffin/SELKS co san, sau do tach lai he thong
-> thanh tung milestone de hieu, kiem thu va cai tien phan DGA. Git series ghi
-> lai qua trinh reconstruction va engineering cua em tu thoi diem nay.
-
-Khong nen noi:
-
-> Em tu viet toan bo Suricata, Elasticsearch, Scirius va 49 nghin ET rules.
-
-Phan co gia tri nhat de HR danh gia la kha nang ban giai thich data flow, viet
-test, do metrics, neu duoc han che va chi ra ro dong gop cua minh.
+Khong nhan la tu viet Suricata, Elasticsearch, Scirius hay ET Open rules.
+Gia tri dong gop nam o cach tich hop, xu ly du lieu, danh gia, kiem thu va neu
+ro han che cua he thong.
