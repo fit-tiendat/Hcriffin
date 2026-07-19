@@ -30,9 +30,10 @@ Hcriffin/
 |   |-- tests/             # Unit tests
 |   |-- app.py             # CLI phan tich domain
 |   |-- prepare_dataset.py # Tao labelled dataset
-|   `-- evaluate.py        # Danh gia detector tren holdout
-|-- README.md
-`-- GIT_WORKFLOW.md
+|   |-- evaluate.py        # Danh gia heuristic tren holdout
+|   |-- train_model.py     # Train va so sanh ML baseline
+|   `-- predict_ml.py      # Chay inference tu model da train
+`-- README.md
 ```
 
 ## Tien do
@@ -41,7 +42,7 @@ Hcriffin/
 |---|---|---|---|
 | 01 | Problem framing va heuristic baseline | CLI phan tich domain, 7 tests | Done |
 | 02 | Dataset pipeline va metrics | Split, confusion matrix, precision/recall/F1 | Done |
-| 03 | Train model ML baseline | Model tu train va bao cao so sanh heuristic | Planned |
+| 03 | Train model ML baseline | Logistic Regression, report, 18 tests | Done |
 | 04 | Tich hop sequence model | Vector hoa ky tu, load/save model, threshold | Planned |
 | 05 | Doc DNS event cua Suricata | Parse `eve.json`, loc va khu trung domain | Planned |
 | 06 | Tich hop Elasticsearch | Doc `logstash-dns-*`, ghi `classify_domains` | Planned |
@@ -52,13 +53,18 @@ Hcriffin/
 
 ## Chay nhanh
 
-Yeu cau Python 3.9 tro len, hien tai chua can dependency ben ngoai.
+Yeu cau Python 3.9 tro len.
 
-```powershell
+```bash
 cd main
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
 python3 app.py google.com asdkjhqwekjhzxc.test
 python3 prepare_dataset.py
 python3 evaluate.py
+python3 train_model.py
+python3 predict_ml.py google.com asdkjhqwekjhzxc.test
 python3 -m unittest discover -s tests -v
 ```
 

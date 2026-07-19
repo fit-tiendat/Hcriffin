@@ -1,8 +1,9 @@
 # HCRiffin DGA Detector
 
 Day la code hien tai cua module phat hien domain co dau hieu DGA. Phien ban
-hien tai gom mot baseline heuristic co the giai thich va pipeline danh gia co
-the lap lai. Chua co Suricata, Elasticsearch hay model ML trong runtime nay.
+hien tai gom heuristic co the giai thich, Logistic Regression baseline va
+pipeline danh gia co the lap lai. Suricata va Elasticsearch chua duoc tich hop
+vao runtime nay.
 
 ## MITRE ATT&CK mapping
 
@@ -26,14 +27,17 @@ raw_legitimate.txt + raw_dga_synthetic.txt
          stratified train/test split
                     |
                     v
-       lexical heuristic detector
-                    |
-                    v
-  confusion matrix + precision/recall/F1
+       lexical feature extraction
+              /             \
+             v               v
+       heuristic       Logistic Regression
+              \             /
+               v           v
+         comparison report + metrics
 ```
 
-Train split duoc tao de san sang cho model o milestone tiep theo. Baseline
-heuristic hien tai khong hoc tu train split.
+Heuristic khong hoc tu train split. Logistic Regression duoc fit tren 48 mau
+train va danh gia tren cung 16 mau holdout dung de do heuristic.
 
 ## Cau truc
 
@@ -42,6 +46,11 @@ main/
 |-- app.py
 |-- prepare_dataset.py
 |-- evaluate.py
+|-- train_model.py
+|-- predict_ml.py
+|-- requirements.txt
+|-- artifacts/
+|   `-- model_metadata.json
 |-- data/
 |   |-- raw_legitimate.txt
 |   |-- raw_dga_synthetic.txt
@@ -53,24 +62,32 @@ main/
 |   |-- domain_features.py
 |   |-- heuristic_detector.py
 |   |-- dataset.py
-|   `-- metrics.py
+|   |-- metrics.py
+|   `-- ml_model.py
 `-- tests/
     |-- test_detector.py
     |-- test_dataset.py
-    `-- test_metrics.py
+    |-- test_metrics.py
+    `-- test_ml_model.py
 ```
 
 ## Cach chay
 
-Yeu cau Python 3.9 tro len, khong co dependency ben ngoai.
+Yeu cau Python 3.9 tro len.
 
-```powershell
+```bash
 cd main
+
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
 
 python3 app.py google.com asdkjhqwekjhzxc.test
 python3 prepare_dataset.py
 python3 evaluate.py
 python3 evaluate.py --threshold 0.40 --report reports/evaluation-threshold-040.md
+python3 train_model.py
+python3 predict_ml.py google.com asdkjhqwekjhzxc.test
 python3 -m unittest discover -s tests -v
 ```
 
@@ -96,10 +113,23 @@ Split co dinh voi seed 42 tao 48 mau train va 16 mau test.
 Threshold 0.55 bo sot 5/8 DGA trong holdout. Ket qua chua co false positive
 chi phan anh tap test benign rat nho, khong chung minh precision thuc te 100%.
 
+## Ket qua ML baseline
+
+Logistic Regression dung cung holdout va threshold 0.50:
+
+| Detector | Accuracy | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|
+| Heuristic | 0.688 | 1.000 | 0.375 | 0.545 |
+| Logistic Regression | 0.938 | 1.000 | 0.875 | 0.933 |
+
+Model ML tim duoc 7/8 DGA va bo sot `silentmeadow.test`. File `.joblib` duoc
+tao lai bang `train_model.py` va bi Git ignore; repository chi luu metadata,
+feature weights va [bao cao danh gia](reports/ml_baseline.md).
+
 ## Han che
 
-- Detector hien tai la rule-based, chua phai Machine Learning.
 - Dataset nho va phan lon duoc chuan bi/mô phong thu cong.
+- ML baseline moi hoc lexical features, chua hoc chuoi ky tu truc tiep.
 - Dictionary DGA co the trong giong domain thong thuong.
 - Hostname CDN/tracking co the trong ngau nhien va gay false positive.
 - Chua dung DNS context nhu source IP, NXDOMAIN, tan suat va network flow.

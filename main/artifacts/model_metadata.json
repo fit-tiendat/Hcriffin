@@ -1,0 +1,41 @@
+{
+  "algorithm": "StandardScaler + LogisticRegression",
+  "dataset_sha256": "1ab3e157ccd7204f5f19f7528eeefce308f4554eb1c51a63ec2e85479d129780",
+  "dataset_size": 64,
+  "feature_names": [
+    "length",
+    "entropy",
+    "digit_ratio",
+    "hyphen_ratio",
+    "vowel_ratio",
+    "unique_ratio",
+    "max_consonant_run",
+    "label_count"
+  ],
+  "heuristic_metrics": {
+    "accuracy": 0.6875,
+    "f1": 0.545455,
+    "fn": 5,
+    "fp": 0,
+    "precision": 1.0,
+    "recall": 0.375,
+    "tn": 8,
+    "tp": 3
+  },
+  "ml_metrics": {
+    "accuracy": 0.9375,
+    "f1": 0.933333,
+    "fn": 1,
+    "fp": 0,
+    "precision": 1.0,
+    "recall": 0.875,
+    "tn": 8,
+    "tp": 7
+  },
+  "model_sha256": "b4ce902c19502afacfb32d47992412b847d2cadec2a574cf47e95bc0d5658f81",
+  "random_seed": 42,
+  "scikit_learn_version": "1.9.0",
+  "test_size": 16,
+  "threshold": 0.5,
+  "train_size": 48
+}
