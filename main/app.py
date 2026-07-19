@@ -1,4 +1,4 @@
-"""Command-line demo for the episode 1 explainable DGA baseline."""
+"""Command-line demo for the explainable DGA heuristic baseline."""
 
 from __future__ import annotations
 
