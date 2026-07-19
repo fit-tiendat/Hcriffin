@@ -35,21 +35,24 @@ domain, IP hoac co lap may tram chua nam trong pham vi ban dau.
 
 ## Lo trinh episode
 
-| Episode | Noi dung | Ket qua kiem chung |
-|---|---|---|
-| 01 | Problem framing va heuristic baseline | CLI phan tich domain, unit test |
-| 02 | Dataset pipeline va metrics | Chia train/test, precision, recall, F1 |
-| 03 | Train model ML baseline | Model tu train va bao cao so sanh heuristic |
-| 04 | Tich hop sequence model | Vector hoa ky tu, load/save model, threshold |
-| 05 | Doc DNS event cua Suricata | Parse `eve.json`, loc va khu trung domain |
-| 06 | Tich hop Elasticsearch | Doc `logstash-dns-*`, ghi `classify_domains` |
-| 07 | Hoan thien Logstash pipeline | EVE JSON duoc dua dung vao cac index |
-| 08 | Tich hop Suricata va ET Open | Tao traffic lab va doi chieu alert/rule |
-| 09 | Docker Compose | Dong goi cac service va health check |
-| 10 | Dashboard va danh gia end-to-end | Demo, bang metrics, MITRE mapping, han che |
+| Episode | Noi dung | Ket qua kiem chung | Trang thai |
+|---|---|---|---|
+| 01 | Problem framing va heuristic baseline | CLI phan tich domain, unit test | Done |
+| 02 | Dataset pipeline va metrics | Chia train/test, precision, recall, F1 | Done |
+| 03 | Train model ML baseline | Model tu train va bao cao so sanh heuristic | Planned |
+| 04 | Tich hop sequence model | Vector hoa ky tu, load/save model, threshold | Planned |
+| 05 | Doc DNS event cua Suricata | Parse `eve.json`, loc va khu trung domain | Planned |
+| 06 | Tich hop Elasticsearch | Doc `logstash-dns-*`, ghi `classify_domains` | Planned |
+| 07 | Hoan thien Logstash pipeline | EVE JSON duoc dua dung vao cac index | Planned |
+| 08 | Tich hop Suricata va ET Open | Tao traffic lab va doi chieu alert/rule | Planned |
+| 09 | Docker Compose | Dong goi cac service va health check | Planned |
+| 10 | Dashboard va danh gia end-to-end | Demo, bang metrics, MITRE mapping, han che | Planned |
 
 Moi episode chi nen duoc commit sau khi da chay test va bo sung phan
 `Ket qua thuc te` trong README cua episode do.
+
+Moi thu muc episode la mot snapshot doc lap de reviewer co the chay lai tung
+moc. Vi vay mot so code nen tang co the duoc lap lai giua hai episode lien ke.
 
 ## Cach dung repository voi nha tuyen dung
 
